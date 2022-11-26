@@ -7,14 +7,15 @@ import numpy as np
 class Video:
     def __init__(self,camera_id=0):
         self.model = tf.keras.models.load_model("CSE499A_Model.h5")
-        self.path = "haarcascade_frontalface_default.xml"
+        self.path = "haarcascade_frontalface_alt2.xml"
         self.camera_id = camera_id
         self.font_scale = 1.5 
         self.font = cv2.FONT_HERSHEY_PLAIN
 
     def video_stream(self):
         classNames= ["Angry","Disgust","Fear","Happy","Neutral","Sad","Surprised"]
-
+        average = []
+        
         face_roi = None    
         cap = cv2.VideoCapture(self.camera_id)
         #Check if the webcam is open correctly
@@ -23,10 +24,10 @@ class Video:
 
         while True:
             ret , frame = cap.read()
-            face_detect = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+            face_detect = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt2.xml')
             gray_img = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 
-            faces = face_detect.detectMultiScale(gray_img,1.1,4)
+            faces = face_detect.detectMultiScale(gray_img,1.1,5)
             
             for x,y,w,h in faces:
                 roi_gray_img = gray_img[y:y+h,x:x+w]
@@ -45,7 +46,7 @@ class Video:
 
                 prediction = self.model.predict(final_img)
                 pred = np.argmax(prediction[0])
-
+                average.append(classNames[pred])
                 x1,y1,w1,h1 = 0,0,175,75
 
                 cv2.rectangle(frame,(x1,x1),(x1+w1,y1+h1),(0,0,0,),-1)
@@ -60,9 +61,14 @@ class Video:
             cv2.imshow("Face emotion recognation", frame)
 
             if cv2.waitKey(1) & 0xFF == ord("q"):
+                print(max(average,key=average.count))
                 break
+
+        cap.release()
+        cv2.destroyAllWindows()    
 
 if __name__ == "__main__":
     fer = Video()
-    fer.video_stream()            
+    fer.video_stream() 
+       
 
