@@ -6,7 +6,7 @@ import numpy as np
 
 class Video:
     def __init__(self,camera_id=0):
-        self.model = tf.keras.models.load_model("CSE499A_Model.h5")
+        self.model = tf.keras.models.load_model("best_model_FER.h5")
         self.path = "haarcascade_frontalface_alt2.xml"
         self.camera_id = camera_id
         self.font_scale = 1.5 

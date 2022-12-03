@@ -9,13 +9,14 @@ path ="ImageData"
 images = []
 classNames = []
 myList = os.listdir(path)
-##print(myList)
+print(myList)
 
 for cl in myList:
     curImg = cv2.imread(f'{path}/{cl}')
     images.append(curImg)
     classNames.append(os.path.splitext(cl)[0])
-##print(classNames)
+print(images)    
+print(classNames)
 
 def findEncodings(images):
     encodeList = []
@@ -32,7 +33,7 @@ encodeListKnown = findEncodings(images)
 cap = cv2.VideoCapture(0)
 
 while True:
-    average = []
+    averageFace = []
     checkIfFound = []
     success, img = cap.read()
     imgS = cv2.resize(img,(0,0),None,0.25,0.25)
@@ -53,7 +54,7 @@ while True:
         if matches[matchIndex]:
             name = classNames[matchIndex].upper()
             ##print(name)
-            average.append(name)
+            averageFace.append(name)
             checkIfFound.append(1)
             y1,x2,y2,x1 = faceLoc
             y1, x2, y2, x1 = y1*4,x2*4,y2*4,x1*4
@@ -64,11 +65,10 @@ while True:
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)
     if cv2.waitKey(1) & 0xFF == ord("q"):
-        print(max(average,key=average.count))
-        if max(average,key=average.count).lower()==username.lower() and max(checkIfFound,key=checkIfFound.count)==1:
+        if max(averageFace,key=averageFace.count,default=0).lower()==username.lower() and max(checkIfFound,key=checkIfFound.count,default=0)==1:
             print("Verification successful")
             print("Welcome " + name)
-        elif max(average,key=average.count).lower()!=username.lower() and max(checkIfFound,key=checkIfFound.count)==1:
+        elif max(averageFace,key=averageFace.count,default=0).lower()!=username.lower() and max(checkIfFound,key=checkIfFound.count,default=0)==1:
             print("Name not found")
         else:
             print("Coud not verify!")
