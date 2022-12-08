@@ -1,0 +1,20 @@
+{% extends 'base.html'%}{% block content %}
+
+<h1 style="text-align: center;font-family: Arial, Helvetica, sans-serif; margin-top: 20px;">FACIAL AND EMOTION DETECTION</h1>
+<div style="justify-content: center; display: flex; margin-top: 30px;">
+    <img src="{{ url_for('video') }}" style="">
+</div>
+<form action="/" method="get" style="justify-content: center; display: flex; margin-top: 50px; margin-bottom: 50px;">
+    <button name="forwardBtn" type="submit" type="button" class="btn btn-dark">Sign In Here</button>
+</form>
+<div style="justify-content: center; display: flex; align-items: center; ">
+    <h2 style="margin-right: 10px;font-family: Arial, Helvetica, sans-serif;">Emotion Detected:</h2>
+    {{emotion}}
+</div>
+<br>
+<div style="justify-content: center; display: flex; align-items: center;">
+    <h2 style="margin-right: 10px;font-family: Arial, Helvetica, sans-serif;">Face Detected:</h2>
+    {{recognition}}
+</div>
+<br>
+{% endblock %}
