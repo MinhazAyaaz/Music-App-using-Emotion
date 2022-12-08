@@ -19,9 +19,10 @@ classNames = ["Angry", "Disgust", "Fear",
 pred = 0
 webcamName = None
 webcamEmotion = None
+globalFrame = None
 
 
-path = "ImageData"
+path = "E:\Music-App-using-Emotion\ImageData"
 averageFace = []
 checkIfFound = []
 images = []
@@ -53,6 +54,7 @@ faceDetect=cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalfac
 class Video(object):
     def __init__(self):
         self.video=cv2.VideoCapture(0)
+        globalFrame = self.video.read()
     def __del__(self):
         self.video.release()
     def get_emotion(self):
@@ -62,10 +64,13 @@ class Video(object):
         return max(averageFace,key=averageFace.count,default=0)
     def get_username(self):
         return username
+    def captureImage(frame):
+        img_name = "{}.png".format(username.lower)
+        cv2.imwrite(os.path.join(path ,img_name),frame)
+    
     def get_frame(self):
         face_roi = None
         ret,frame=self.video.read()
-        
         face_detect = cv2.CascadeClassifier(
             cv2.data.haarcascades + faceDetectionPath)
         
