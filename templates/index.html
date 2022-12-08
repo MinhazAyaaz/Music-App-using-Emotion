@@ -1,20 +1,93 @@
-{% extends 'base.html'%}{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<h1 style="text-align: center;font-family: Arial, Helvetica, sans-serif; margin-top: 20px;">FACIAL AND EMOTION DETECTION</h1>
-<div style="justify-content: center; display: flex; margin-top: 30px;">
-    <img src="{{ url_for('video') }}" style="">
-</div>
-<form action="/" method="get" style="justify-content: center; display: flex; margin-top: 50px; margin-bottom: 50px;">
-    <button name="forwardBtn" type="submit" type="button" class="btn btn-dark">Sign In Here</button>
-</form>
-<div style="justify-content: center; display: flex; align-items: center; ">
-    <h2 style="margin-right: 10px;font-family: Arial, Helvetica, sans-serif;">Emotion Detected:</h2>
-    {{emotion}}
-</div>
-<br>
-<div style="justify-content: center; display: flex; align-items: center;">
-    <h2 style="margin-right: 10px;font-family: Arial, Helvetica, sans-serif;">Face Detected:</h2>
-    {{recognition}}
-</div>
-<br>
-{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+
+    <title>FAE Detection</title>
+  </head>
+  <body>
+    {% extends 'base.html'%}{% block content %}
+
+    <h1
+      style="
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 20px;
+      "
+    >
+      FACIAL AND EMOTION DETECTION
+    </h1>
+    <div style="justify-content: center; display: flex; margin-top: 30px">
+      <img src="{{ url_for('video') }}" style="" />
+    </div>
+    <div style="display: flex; justify-content: center">
+      <form
+        action="/"
+        method="post"
+        style="
+          justify-content: center;
+          display: flex;
+          margin-top: 50px;
+          margin-bottom: 50px;
+          padding-right: 20px;
+        "
+      >
+        <button
+          name="capture"
+          type="submit"
+          type="button"
+          class="btn-dark"
+          style="border-radius: 20px; width: 180px; height: 40px"
+        >
+          Capture Image
+        </button>
+      </form>
+      <form
+        action="/"
+        method="get"
+        style="
+          justify-content: center;
+          display: flex;
+          margin-top: 50px;
+          margin-bottom: 50px;
+          padding-left: 20px;
+        "
+      >
+        <button
+          name="simulate"
+          type="submit"
+          type="button"
+          class="btn-dark"
+          style="border-radius: 20px; width: 180px; height: 40px"
+        >
+          Run Simulation
+        </button>
+      </form>
+    </div>
+    <div style="justify-content: center; display: flex; align-items: center">
+      <h2 style="margin-right: 10px; font-family: Arial, Helvetica, sans-serif">
+        Emotion Detected:
+      </h2>
+      {{emotion}}
+    </div>
+    <br />
+    <div style="justify-content: center; display: flex; align-items: center">
+      <h2 style="margin-right: 10px; font-family: Arial, Helvetica, sans-serif">
+        Face Detected:
+      </h2>
+      {{recognition}}
+    </div>
+    <br />
+    {% endblock %}
+  </body>
+</html>

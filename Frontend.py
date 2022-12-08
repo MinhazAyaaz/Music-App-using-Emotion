@@ -12,6 +12,7 @@ def index():
     else:
         return render_template('index.html')
 
+
 def gen(camera):
     while True:
         frame=camera.get_frame()
