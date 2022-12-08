@@ -103,6 +103,7 @@ while True:
 
         if faceDis[matchIndex] > 0.50:
             checkIfFound.append(0)
+            webcamName = "unknown"
 
         if matches[matchIndex]:
             name = fileNames[matchIndex]
