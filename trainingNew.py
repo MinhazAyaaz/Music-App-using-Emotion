@@ -78,7 +78,7 @@ final_output = layers.Dense(128)(base_output) ##adding new layer, after the outp
 final_output = layers.Activation('relu')(final_output) ## Activation function
 final_output = layers.Dense(64)(final_output) 
 final_output = layers.Activation('relu')(final_output)
-final_output = layers.Dense(25,activation='sigmoid')(final_output) ## my classes are 07, classification layer
+final_output = layers.Dense(1,activation='sigmoid')(final_output) ## my classes are 07, classification layer
 
 final_output ##checking
 
