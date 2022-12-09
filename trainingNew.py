@@ -21,7 +21,7 @@ with open("E:\Music-App-using-Emotion\label.csv", "r") as handler:
 Datadirectory = "trainNew/"
 os.chdir('E:\Music-App-using-Emotion')
 
-Classes = ["0","1","2","3","4","5","6","7","8","9","10"]
+Classes = ["0","1","2","3","4","5","6","7","8","9"]
 
 img_size = 224
 
@@ -56,6 +56,7 @@ y.shape
 for features,label in training_Data:
     X.append(features)
     Y.append(label)
+
     
 X = np.array(X).reshape(-1,img_size,img_size,3)
     
@@ -92,9 +93,6 @@ Y = np.array(Y)
 new_model.fit(X,Y, epochs = 30) ##Change to 25 if accuracy low
 
 new_model.save("CSE499A_Model_new.h5")
-
-
-
 
 
 

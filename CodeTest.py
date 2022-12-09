@@ -7,8 +7,9 @@ import face_recognition
 # username = input('Enter your name?\n')
 username = "Minhaz"
 
-camera_id = 0
 model = tf.keras.models.load_model("CSE499A_Model.h5")
+
+camera_id = 0
 faceDetectionPath = "haarcascade_frontalface_alt2.xml"
 camera_id = camera_id
 font_scale = 1.5
